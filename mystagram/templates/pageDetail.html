@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}详情页{% endblock%}
+{% block css %}/static/styles/pages/detail.css{% endblock%}
+{% block content %}
+<div class="page-main clearfix">
+    <article>
+        <div class="pic-wrapper">
+            <img src="{{image.url}}?imageView/1/w/600/h/600">
+        </div>
+        <div class="pic-discuss">
+            <header class="discuss-hd">
+                <a href="/profile/{{image.user.id}}" class="avatar">
+                    <img src="{{image.user.head_url}}">
+                </a>
+                <div class="profile-info">
+                    <a title="{{image.user.username}}" href="/profile/{{image.user.id}}">{{image.user.username}}</a>
+                </div>
+            </header>
+            <!--
+            <section class="like-item">
+                <time class="discuss-time" datetime="2016-05-07T02:21:41.000Z" title="2016年5月7日" data-reactid=".0.1.0.0.0.2.0.1.0">2 周</time>
+                <div class="like-names">
+                    <a class="_4zhc5 _lx2l2" title="redmadqueen" href="/redmadqueen/">redmadqueen</a>、
+                    <a class="_4zhc5 _lx2l2" title="chuan.hehe" href="/chuan.hehe/" data-reactid=".0.1.0.0.0.2.0.0.3">chuan.hehe</a>、
+                    <a class="_4zhc5 _lx2l2" title="relationshipinspire" href="/relationshipinspire/" data-reactid=".0.1.0.0.0.2.0.0.5">relationshipinspire</a>、
+                    <a class="_4zhc5 _lx2l2" title="archisdy" href="/archisdy/" data-reactid=".0.1.0.0.0.2.0.0.7">archisdy</a>、
+                    <a class="_4zhc5 _lx2l2" title="scottiecosmos" href="/scottiecosmos/" data-reactid=".0.1.0.0.0.2.0.0.9">scottiecosmos</a>
+                    <span data-reactid=".0.1.0.0.0.2.0.0.a"> 赞了</span>
+                </div>
+            </section>
+            -->
+            <ul class="discuss-list js-discuss-list" style="height: 430px;overflow-y: auto">
+                <!--
+                <li>
+                    <h1>
+                        <a>toutvadisparaitre</a>
+                        <span data-reactid=".0.1.0.0.0.2.1.0.0.1">
+                            <span data-reactid=".0.1.0.0.0.2.1.0.0.1.0">和朋友吐一吐是解忧最佳</span>
+                        </span>
+                    </h1>
+                </li>
+                <li>
+                    <a>scottiecosmos</a>
+                    <span>
+                        <span>That's what i call "awesomeness"</span>
+                    </span>
+                </li>
+                -->
+                {% for comment in comments%}
+                <li>
+                    <!-- <a class=" icon-remove" title="删除评论"></a> -->
+                    <a class="_4zhc5 _iqaka" title="{{comment.user.username}}" href="/profile/{{comment.user.id}}">{{comment.user.username}}</a>
+                    <span>
+                        <span>{{comment.content}}</span>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <section class="discuss-edit">
+                <a class="icon-heart-empty"></a>
+                <input placeholder="添加评论..." id="jsCmt" type="text">
+                <button class="more-info" id="jsSubmit">更多选项</button>
+            </section>
+        </div>
+    </article>
+</div>
+{% endblock%}
+{% block js %}
+<script type="text/javascript">
+    window.imageId ={{image.id}};
+</script>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/detail.js"></script>
+{% endblock%}
