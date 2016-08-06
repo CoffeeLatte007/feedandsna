@@ -2,7 +2,7 @@
 {% block title %}个人主页{% endblock%}
 {% block css %}/static/styles/pages/profile.css{% endblock%}
 {% block content %}
-<div class="page-main clearfix">
+<div class="page-main clearfix" ng-app="userInfo">
     <article>
         <header class="profile-detail clearfix">
             <div class=" profile-avatar">
@@ -21,6 +21,13 @@
                 <div class="profile-info-main" data-reactid=".0.1.0.0:0.1.0">
                     <h1 class="name" title="taylorswift">{{user.username}}</h1>
                     <span class="verified" title="已验证">已验证</span>
+                    {% if user.id != current_user.id %}
+                    <span class="follow-info">
+                        <img class="loading" src="/static/images/img/loading.gif" >
+                        <button class="follow" data-uid={{user.id}}>+ 关注他</button>
+                        <button class="isfollower">已关注</button>
+                    </span> 
+                    {% endif %}
                     {% if user.id == current_user.id %}
                     <span class="_jxp6f _e616g" style="display:inline-block;position:relative;">
                         <form method="post" action="/upload/" enctype="multipart/form-data">
@@ -31,26 +38,30 @@
                     <a class="more-info" href="/logout/">退出</a>
                     {% endif %}
                 </div>
-                <!--
-                <div class="profile-info-sub">
-                    <h2>Taylor Swift</h2>
-                    <span class="birth">Born in 1989.</span>
+                <div class="profile-info-side">
+                    <button class="followers">
+                    {% if user.id == current_user.id %}
+                        关注我的人
+                    {% endif %}
+                    {% if user.id != current_user.id %}
+                        关注他的人
+                    {% endif %}
+                        (<span class="followers_count">
+                            <img class="loading" src="/static/images/img/loading.gif" >
+                        </span>)
+                    </button>
+                    <button class="following">
+                    {% if user.id == current_user.id %}
+                        我关注的人
+                    {% endif %}
+                    {% if user.id != current_user.id %}
+                        他关注的人
+                    {% endif %}
+                        (<span class="following_count">
+                            <img class="loading" src="/static/images/img/loading.gif" >
+                        </span>)
+                    </button>
                 </div>
-                <ul class="status-list clearfix">
-                    <li>
-                        <span class="s-title">已发帖 </span>
-                        <span class="s-num">909</span>
-                    </li>
-                    <li>
-                        <span class="s-num">909</span>
-                        <span class="s-title">人关注 </span>
-                    </li>
-                    <li>
-                        <span class="s-title">已关注 </span>
-                        <span class="s-num">909万</span>
-                    </li>
-                </ul>
-            -->
             </div>
         </header>
         <div class="list-mod">
@@ -94,5 +105,7 @@
 <script type="text/javascript" src="/static/js/profile.js"></script>
 <script type="text/javascript">
     window.uid = {{user.id}};
+    window.cuid = {{current_user.id}};
 </script>
+<script type="text/javascript" src="/static/js/app.js"></script>
 {% endblock%}

@@ -60,6 +60,60 @@
     vertical-align: middle;
 }
 
+.follow-info {
+    vertical-align: bottom;
+}
+.follow, .isfollower {
+    display: none;
+    background-color: #10b710;
+    margin-left: 24px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+}
+.isfollower {
+    background-color: #dfdfdf;
+}
+.follow:hover{
+    background-color: #109710;
+}
+
+.list-mod .follow, .list-mod .isfollower {
+    margin-left: 0;
+    font-size: 18px;
+}
+
+.following {
+    margin-left: 20px;
+}
+.followers, .following {
+    background-color: #6090f7;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+}
+.followers:hover, .following:hover {
+    background-color: #6090d7;
+}
+.followers:focus, .following:focus {
+    background-color: #6090d7;
+}
+.followers_count, .following_count {
+    color: red;
+}
+.loading {
+    width: 18px;
+    height: 18px;
+}
+
+button:focus{
+    outline: none;
+}
+
 .verified {
     display: inline-block;
     vertical-align: middle;
@@ -225,4 +279,28 @@
     top: 30%;
     left: 43%;
     background: #fff;
+}
+.follow-item, .follow-avatar, .follow-opt, .follow-info {
+    display: inline-block;
+}
+.follow-item {
+    width: 33%;
+    margin-bottom: 1em;
+}
+.follow-avatar {
+    vertical-align: bottom;
+    margin-right: 14px;
+}
+.follow-avatar img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    vertical-align: bottom;
+}
+.follow-opt span {
+    display: block;
+}
+.follow-name{
+    font-size: 14px;
+    font-weight: bold;
 }
