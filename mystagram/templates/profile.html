@@ -42,8 +42,7 @@
                     <button class="followers">
                     {% if user.id == current_user.id %}
                         关注我的人
-                    {% endif %}
-                    {% if user.id != current_user.id %}
+                    {% else %}
                         关注他的人
                     {% endif %}
                         (<span class="followers_count">
@@ -53,8 +52,7 @@
                     <button class="following">
                     {% if user.id == current_user.id %}
                         我关注的人
-                    {% endif %}
-                    {% if user.id != current_user.id %}
+                    {% else %}
                         他关注的人
                     {% endif %}
                         (<span class="following_count">

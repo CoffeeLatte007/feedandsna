@@ -25,6 +25,7 @@
 .web-menu {
     float: right;
     margin-top: 20px;
+    position: relative;
 }
 .profile-ico {
     background-image: url(../../images/img/icons.png);
@@ -37,4 +38,39 @@
     overflow: hidden;
     text-indent: 110%;
     white-space: nowrap;
+}
+.userfeed {
+    display: none;
+    position: absolute;
+    left: -75px;
+    width: auto;
+    box-shadow: 3px 3px 3px #ccc, -3px 3px 3px #ccc;
+    background-color: #fff;
+    text-align: center;
+    z-index: 100;
+}
+.userfeed .loading {
+    width: 174px;
+    height: 174px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading img {
+    width: 50px;
+    height: 50px;
+    flex: none;
+}
+.web-menu:hover .userfeed {
+    display: block;
+}
+
+.feed-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.userfeed li {
+    white-space: nowrap;
+    padding: 5px;
 }

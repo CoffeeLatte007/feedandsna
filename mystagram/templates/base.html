@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="Keywords" content="">
-
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% block css %}{% endblock %}">
 </head>
@@ -17,6 +17,11 @@
                     <div class="web-menu">
                         {% if current_user.is_authenticated %}
                         <a class="profile-ico" href="/profile/{{current_user.id}}">{{current_user.username}}</a>
+                        <ul class="userfeed">
+                            <div class="loading">
+                                <img src="/static/images/img/loading.gif">
+                            </div>
+                        </ul>
                         {% else %}
                         <a class="profile-ico" href="/regloginpage/">登陆/注册</a>
                         {% endif %}
@@ -83,6 +88,53 @@
             </footer>
         </section>
     </div>
+
+    <script>
+        window.cuid = {{current_user.id}}
+        $(function() {
+            $(".web-menu").on('mouseover', function(e) {
+                if (window.cuid) {
+                    $.ajax({
+                        url: 'http://123.206.46.62:8080/' + window.cuid + '/feed?start=1&end=10',
+                        type: 'GET',
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        success: function(res) {
+                            var html = '<li>最新动态</li>'
+                            res.data.feeds.forEach(function(item) {
+                                html += '<li><a class="img-link" href="/image/' + item.imageId + '">'
+                                    + '<img class="feed-avatar" title='+ item.username
+                                    + ' src="' + item.headUrl +'">于'
+                                    + '<time>' + formatTime(item.createTime) +'</time>'
+                                    + '更新</a></li>'
+                            })
+
+                            $(".userfeed").html(html)
+
+                        }
+                    })
+                }
+                return false
+            })
+        })
+
+        function formatTime(time) {
+            if (typeof time !== 'object') {
+                time = new Date(time)
+            }
+            var month = time.getMonth() + 1
+            var date = time.getDate()
+            var h = time.getHours()
+            var m = time.getMinutes()
+            var pre = [time.getFullYear(),
+                month >= 10 ? month : "0" + month,
+                date >= 10 ? date : "0" + date].join("-")
+            var next = [h >= 10 ? h : "0" + h,
+                m >= 10 ? m : "0" + m].join(":")
+
+            return pre + " " + next
+        }
+    </script>
 </body>
 {% block js %}{% endblock %}
 </html>
